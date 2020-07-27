@@ -62,3 +62,23 @@ Kubernetes는 `Service Types`을 이용해 Service의 종류를 지정하게 해
 - Ingress
     - service의 type은 아니지만 클래스터 내의 서비스에 대한 접근을 관리하는 object이다.
     - Cluster 외부에서 Cluster 내부로 HTTP와 HTTPS 경로를 노출하는 역할이다.    
+
+
+## Kube-proxy
+kube-proxy는 ClusterIP, NodePort로 접근하는 request를 service에 접근하게 해주는 역할이다.
+
+kube-proxy는 각 Node마다 실행되고 있으며, 클러스터 내부 IP로 연결되기 원하는 요청을 적절한 곳으로 전달해준다.
+
+kube-proxy를 관리하는 방법은 `userspace`, `iptables`, `ipvs`가 존재한다.
+
+- userspace
+    - Client에서 service IP를 통해서 요청이 들어오면 iptables를 거쳐 kube-proxy가 요청을 받고, service에 request를 전달한다.
+    - 이때 요청을 pod에 나눠주는 방식은 `round robin`이다.
+- iptables
+    - userspace와 구조는 비슷하나 kube-proxy는 직접 request를 받지 않고, iptables만 관리한다.
+    - pod에 request를 전달하는 역할은 iptables를 거쳐 전달된다.
+    - userspace 보다 빠르나 pod으로 전달하는 요청이 실패하면 재시도를 하지 않고 실패한다.
+- ipvs
+    - 리눅스 커널에 존재하는 L4 로드밸런싱 기술로 Netfilter에 포함되어 있다.
+    - ipvs는 커널스페이스에서 동작하기 때문에 iptables보다 빠르다.
+    - 또한 다양한 알고리즘 제공한다.
