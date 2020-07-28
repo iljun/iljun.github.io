@@ -13,7 +13,7 @@ Factory 패턴과 비슷하지만 Factory 패턴을 더 추상화한 패턴이�
 Factory 패턴의 한계를 극복해야 할 때 적용해야 하는 패턴이다.
 
 
-![Abstract Factory Image](./abstract-factory-pattern.png)
+![Abstract Factory Image](/assets/img/abstract-factory-pattern.png)
 
 출처: https://gmlwjd9405.github.io/2018/08/08/abstract-factory-pattern.html
 
