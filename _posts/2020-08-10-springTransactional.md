@@ -1,6 +1,6 @@
 ---
 layout: post
-title: @Transactional
+title: Transactional
 subtitle: Spring Transactional Annotation
 ---
 # @Transactional 
